@@ -47,6 +47,62 @@ body, html {
     }
 }
 
+/* Color Picker Styles */
+.color-picker {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    z-index: 10;
+    padding: 10px 15px;
+    background: var(--overlay-bg);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.team-input {
+    width: 60px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.team-input:focus {
+    border-bottom-color: white;
+}
+
+.color-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.color-btn:active {
+    transform: scale(0.8);
+}
+
+/* Defined swatches for the buttons */
+.btn-blue { background-color: #1a365d; }
+.btn-cyan { background-color: #0c4e5a; }
+.btn-black { background-color: #222222; }
+.btn-pink { background-color: #5d1a4e; }
+
 .court {
     flex: 1;
     display: flex;
@@ -60,14 +116,11 @@ body, html {
     overflow: hidden;
 }
 
-/* Slightly different gradients for left/right to distinguish */
-#court-left {
-    background: linear-gradient(135deg, #111 0%, var(--court-1-color) 100%);
-}
-
-#court-right {
-    background: linear-gradient(225deg, #111 0%, var(--court-2-color) 100%);
-}
+/* Background Color Classes */
+.bg-blue { background: linear-gradient(135deg, #111 0%, #1a365d 100%); }
+.bg-cyan { background: linear-gradient(135deg, #111 0%, #0c4e5a 100%); }
+.bg-black { background: linear-gradient(135deg, #0a0a0a 0%, #222222 100%); }
+.bg-pink { background: linear-gradient(135deg, #111 0%, #5d1a4e 100%); }
 
 .team-name {
     font-size: 2.5rem;
@@ -224,4 +277,19 @@ body, html {
     border-radius: 50%;
     pointer-events: none;
     opacity: 0;
+}
+
+/* Footer Title */
+.footer-title {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 25;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 2px;
+    pointer-events: none;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }

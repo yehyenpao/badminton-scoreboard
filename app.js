@@ -1,16 +1,44 @@
-// State
 let sides = {
     left: {
         score: 0,
         sets: 0,
-        id: 'left' // references the initial DOM side
+        id: 'left', // references the initial DOM side
+        color: 'bg-blue'
     },
     right: {
         score: 0,
         sets: 0,
-        id: 'right'
+        id: 'right',
+        color: 'bg-cyan' // changed from red to cyan for default
     }
 };
+
+// Global mapping of colors to team names
+const globalTeamNames = {
+    'bg-blue': '藍隊',
+    'bg-cyan': '青隊',
+    'bg-black': '黑隊',
+    'bg-pink': '粉隊'
+};
+
+window.updateGlobalTeamName = function(colorClass, newName) {
+    globalTeamNames[colorClass] = newName;
+    
+    // Update all input fields that belong to this color
+    document.querySelectorAll(`.input-${colorClass}`).forEach(input => {
+        if(input.value !== newName) {
+            input.value = newName;
+        }
+    });
+    
+    // If any side is currently using this color, update their large name!
+    if(sides.left.color === colorClass) {
+        els.left.name.textContent = newName;
+    }
+    if(sides.right.color === colorClass) {
+        els.right.name.textContent = newName;
+    }
+}
 
 // Elements
 const els = {
@@ -92,10 +120,26 @@ window.updateSets = function(side, change) {
     }
 }
 
+window.setCourtColor = function(side, colorClass) {
+    sides[side].color = colorClass;
+    els[side].name.textContent = globalTeamNames[colorClass];
+    updateDOM(side);
+}
+
+const colorClasses = ['bg-blue', 'bg-cyan', 'bg-black', 'bg-pink'];
+
 function updateDOM(side) {
     els[side].score.textContent = sides[side].score;
     els[side].sets.textContent = sides[side].sets;
+    
+    // Apply background color class
+    colorClasses.forEach(c => els[side].court.classList.remove(c));
+    els[side].court.classList.add(sides[side].color);
 }
+
+// Initial paint
+updateDOM('left');
+updateDOM('right');
 
 function animateScore(element, type) {
     element.classList.remove('pop', 'shrink');
